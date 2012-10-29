@@ -15,6 +15,10 @@ module Zipmark
       pagination_hash["total"]
     end
 
+    def per_page
+      pagination_hash["per_page"]
+    end
+
     def current_page
       pagination_hash["page"]
     end

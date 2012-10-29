@@ -1,7 +1,7 @@
 require 'zipmark/callback'
 require 'zipmark/client'
 require 'zipmark/collection'
-require 'zipmark/item'
+require 'zipmark/entity'
 require 'zipmark/iterator'
 require 'zipmark/pagination'
 require 'zipmark/resource'

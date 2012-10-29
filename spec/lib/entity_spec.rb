@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Zipmark::Item do
+describe Zipmark::Entity do
   let(:options) { {} }
-  let(:item) { Zipmark::Item.new(options) }
+  let(:item) { Zipmark::Entity.new(options) }
 
   subject { item }
 

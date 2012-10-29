@@ -6,8 +6,11 @@ module Zipmark
       @options = Util.stringify_keys(options)
     end
 
-    def find_all
-      Zipmark::Collection.new(rel, client.get(href).body)
+    def all
+      @collection = Zipmark::Collection.new(self, Zipmark::Iterator)
+    end
+
+    def find
     end
 
     def href

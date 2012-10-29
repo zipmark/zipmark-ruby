@@ -2,10 +2,11 @@ module Zipmark
   class Collection
     include Enumerable
 
-    attr_accessor :object_type, :iterator
+    attr_accessor :iterator
 
-    def initialize(object_type, item_json, iterator_class = Zipmark::Iterator)
-      @iterator = iterator_class.new(item_json)
+    def initialize(resource, iterator_class)
+      fetched_resource = resource.client.get(resource.href)
+      @iterator = iterator_class.new(fetched_resource.body, :resource_name => resource.rel, :client => resource.client)
     end
 
     def items
@@ -17,7 +18,9 @@ module Zipmark
     end
 
     def each
-      yield iterator.current_item while iterator.next_item
+      begin
+        yield iterator.current_item
+      end while iterator.next_item
     end
   end
 end
