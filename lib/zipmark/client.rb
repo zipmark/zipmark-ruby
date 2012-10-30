@@ -19,6 +19,10 @@ module Zipmark
       adapter.get(path)
     end
 
+    def post(path, body)
+      adapter.post(path, body)
+    end
+
     def method_missing(meth, *args, &block)
       resources[meth.to_s] || raise(NoMethodError, "No resource or method: '#{meth}'")
     end

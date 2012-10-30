@@ -22,6 +22,10 @@ module Zipmark
         self.class.get(path, adapter_options)
       end
 
+      def post(path, body)
+        self.class.post(path, adapter_options.merge(:body => body))
+      end
+
       private
       def adapter_options
         {

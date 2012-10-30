@@ -18,6 +18,7 @@ module Zipmark
     end
 
     def each
+      # Wrapping in the being block ensures that the current_item is returned once before next_item is called
       begin
         yield iterator.current_item
       end while iterator.next_item

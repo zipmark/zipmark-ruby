@@ -6,5 +6,5 @@ describe Zipmark::Entity do
 
   subject { item }
 
-  its(:options) { should == Zipmark::Util.stringify_keys(options) }
+  its(:attributes) { should == Zipmark::Util.stringify_keys(options) }
 end
