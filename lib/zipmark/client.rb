@@ -5,11 +5,10 @@ module Zipmark
   #
   #   client = Zipmark::Client.new("app-id", "app-secret", :production => false)
   #   client.get("/")
+  #
   class Client
-    attr_accessor :application_id
-    attr_accessor :application_secret
-    attr_accessor :adapter
-    attr_accessor :resources
+    # Public: Gets the Adapter.
+    attr_reader :adapter
 
     # Public: Initialize a Zipmark Client
     #
@@ -23,27 +22,42 @@ module Zipmark
       adapter.production = options[:production]
       adapter.username = application_id
       adapter.password = application_secret
-      self.resources = load_resources
+      @resources = load_resources
     end
 
+
+    # Public: Send a GET Request to the given API Path
+    #
+    # path - A String which can be a relative path to the API root, or a full URL
     def get(path)
       adapter.get(path)
     end
 
+    # Public: Send a POST Request to the given API Path
+    #
+    #  path - A String which can be a relative path to the API root, or a full URL
+    #  body - A Object which responds to to_json and represents the body of the POST
     def post(path, body)
       adapter.post(path, body)
     end
 
+    # Public: Send a PUT Request to the given API Path
+    #
+    #  path - A String which can be a relative path to the API root, or a full URL
+    #  body - A Object which responds to to_json and represents the body of the PUT
     def put(path, body)
       adapter.put(path, body)
     end
 
+    # Public: Send a DELETE Request to the given API Path
+    #
+    # path - A String which can be a relative path to the API root, or a full URL
     def delete(path)
       adapter.delete(path)
     end
 
     def method_missing(meth, *args, &block)
-      resources[meth.to_s] || raise(NoMethodError, "No resource or method: '#{meth}'")
+      @resources[meth.to_s] || raise(NoMethodError, "No resource or method: '#{meth}'")
     end
 
     private

@@ -13,7 +13,6 @@ describe Zipmark::Client do
   end
 
   it { should respond_to(:adapter) }
-  it { should respond_to(:adapter=)}
 
   it "should have default http adapter class" do
     client.adapter.should be_a(default_adapter)
