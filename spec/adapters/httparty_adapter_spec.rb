@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+require 'zipmark/adapters/httparty_adapter'
+
 describe Zipmark::Adapters::HTTPartyAdapter do
   let(:username) { "user" }
   let(:password) { "pass" }

@@ -23,7 +23,15 @@ module Zipmark
       end
 
       def post(path, body)
-        self.class.post(path, adapter_options.merge(:body => body))
+        self.class.post(path, adapter_options.merge(:body => body.to_json))
+      end
+
+      def put(path, body)
+        self.class.put(path, adapter_options.merge(:body => body.to_json))
+      end
+
+      def delete(path)
+        self.class.delete(path, adapter_options)
       end
 
       private

@@ -13,7 +13,7 @@ module Zipmark
     def find(id)
       json = client.get("/" + rel + "/" + id).body
       object = JSON.parse(json)
-      Zipmark::Entity.new(object[resource_name])
+      Zipmark::Entity.new(object[resource_name].merge(:client => client, :resource_type => resource_name))
     end
 
     def build(options)

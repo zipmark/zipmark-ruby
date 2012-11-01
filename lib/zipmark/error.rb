@@ -1,5 +1,5 @@
 module Zipmark
-  class Error
+  class Error < StandardError
     attr_accessor :classification, :messages, :code
   end
 end

@@ -27,7 +27,11 @@ module Zipmark
     end
 
     def items
-      @items ||= collection.map {|item| Entity.new(item) }
+      @items ||= collection.map {|item| Entity.new(item.merge(:client => options[:client], :resource_type => resource_singular)) }
+    end
+
+    def resource_singular
+      options[:resource_name].sub(/s$/, '')
     end
 
     def pagination

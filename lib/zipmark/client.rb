@@ -2,7 +2,7 @@ module Zipmark
   class Client
     attr_accessor :application_id, :application_secret, :adapter, :resources
 
-    def initialize(application_id, application_secret, adapter = Zipmark::Adapters::HTTPartyAdapter.new)
+    def initialize(application_id, application_secret, adapter = Zipmark::Adapters::HTTPClientAdapter.new)
       @adapter = adapter
       adapter.username = application_id
       adapter.password = application_secret
@@ -11,7 +11,8 @@ module Zipmark
 
     def load_resources
       hash = {}
-      adapter.get("/")["vendor_root"]["links"].each {|link| hash[link["rel"]] = Resource.new({ :client => self }.merge(link)) }
+      response = JSON.parse(adapter.get("/").body)
+      response["vendor_root"]["links"].each {|link| hash[link["rel"]] = Resource.new({ :client => self }.merge(link)) }
       hash
     end
 
@@ -21,6 +22,14 @@ module Zipmark
 
     def post(path, body)
       adapter.post(path, body)
+    end
+
+    def put(path, body)
+      adapter.put(path, body)
+    end
+
+    def delete(path)
+      adapter.delete(path)
     end
 
     def method_missing(meth, *args, &block)

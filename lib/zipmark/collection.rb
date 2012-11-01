@@ -5,8 +5,8 @@ module Zipmark
     attr_accessor :iterator
 
     def initialize(resource, iterator_class)
-      fetched_resource = resource.client.get(resource.href)
-      @iterator = iterator_class.new(fetched_resource.body, :resource_name => resource.rel, :client => resource.client)
+      fetched_resource = resource.client.get(resource.href).body
+      @iterator = iterator_class.new(fetched_resource, :resource_name => resource.rel, :client => resource.client)
     end
 
     def items

@@ -1,21 +1,26 @@
 module Zipmark
   class Entity
-    attr_accessor :attributes, :client, :resource_type, :errors
+    attr_accessor :attributes, :client, :resource_type, :errors, :dirty_attributes
 
     def initialize(options={})
       @errors = {}
       @attributes = Util.stringify_keys(options)
+      @dirty_attributes = {}
       @client = @attributes.delete("client")
       @resource_type = @attributes.delete("resource_type")
     end
 
     def method_missing(meth, *args, &block)
-      attributes[meth.to_s]
+      if meth =~ /=$/
+        dirty_attributes[meth.to_s.sub(/=$/, '')] = args.first
+      else
+        dirty_attributes[meth.to_s] || attributes[meth.to_s]
+      end
     end
 
     def save
       if url
-        response = client.put(url, resource_type => attributes)
+        response = client.put(url, resource_type => dirty_attributes)
       else
         response = client.post("/#{resource_type}s", resource_type => attributes)
       end
@@ -25,7 +30,7 @@ module Zipmark
 
     def apply_response(response)
       object = JSON.parse(response.body)
-      if response.success?
+      if response.ok?
         @attributes = object[resource_type]
       elsif response.code == 422
         @errors = object
@@ -35,12 +40,20 @@ module Zipmark
     end
 
     def valid?
-      id && errors.empty?
+      !!(id && errors.empty?)
     end
 
     def url
       link = links.detect {|link| link["rel"] == "self" } if links && !links.empty?
       link["href"] if link
+    end
+
+    def updated_at
+      Time.parse(attributes["updated_at"]) if attributes["updated_at"]
+    end
+
+    def  created_at
+      Time.parse(attributes["created_at"]) if attributes["created_at"]
     end
   end
 end
