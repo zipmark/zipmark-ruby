@@ -2,8 +2,9 @@ module Zipmark
   class Client
     attr_accessor :application_id, :application_secret, :adapter, :resources
 
-    def initialize(application_id, application_secret, adapter = Zipmark::Adapters::HTTPClientAdapter.new)
-      @adapter = adapter
+    def initialize(application_id, application_secret, options = {})
+      @adapter = options[:adapter] || Zipmark::Adapters::HTTPClientAdapter.new
+      adapter.production = options[:production]
       adapter.username = application_id
       adapter.password = application_secret
       self.resources = load_resources
