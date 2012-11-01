@@ -12,7 +12,7 @@ module Zipmark
 
     def load_resources
       hash = {}
-      response = JSON.parse(adapter.get("/").body)
+      response = JSON.parse(get("/").body)
       response["vendor_root"]["links"].each {|link| hash[link["rel"]] = Resource.new({ :client => self }.merge(link)) }
       hash
     end
