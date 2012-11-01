@@ -18,6 +18,10 @@ task :build do
 end
 
 desc "Build and Release the Zipmark Gem"
-task :release => :build do
-  system "gem push zipmark-#{Zipmark::VERSION}"
+task :release => [:build, :push]
+
+
+desc "Push Rubygem for Release"
+task :push do
+  system "gem push zipmark-#{Zipmark::VERSION}.gem"
 end

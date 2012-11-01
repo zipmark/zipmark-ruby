@@ -1,3 +1,3 @@
 module Zipmark
-  VERSION = '0.0.1pre'
+  VERSION = '0.0.1.beta.1'
 end
