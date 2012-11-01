@@ -49,7 +49,7 @@ module Zipmark
 
     def fetch_item_from_next_page
       return if pagination.last_page?
-      self.json = client.get(next_page["href"])
+      self.json = JSON.parse(client.get(next_page["href"]).body)
       @items = nil
       @pagination = nil
       @current_item = items.first

@@ -21,4 +21,8 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
   config.mock_with :rspec
+
+  config.before(:each) do
+    HTTPClient.any_instance.stub(:set_auth)
+  end
 end

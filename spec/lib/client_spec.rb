@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Zipmark::Client do
   let(:app_id) { "my-app-id" }
   let(:app_secret) { "my-app-secret" }
-  let(:default_adapter) { Zipmark::Adapters::HTTPartyAdapter }
+  let(:default_adapter) { Zipmark::Adapters::HTTPClientAdapter }
   let(:client) { Zipmark::Client.new(app_id, app_secret) }
 
   subject { client }
