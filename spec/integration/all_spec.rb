@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "fetching a list of bills" do
   let(:app_id) { "my-app-id" }
   let(:app_secret) { "my-app-secret" }
-  let(:client) { Zipmark::Client.new(app_id, app_secret) }
+  let(:client) { Zipmark::Client.new(:application_id => app_id, :application_secret => app_secret) }
 
   before do
     stub_request(:get, "https://sandbox.zipmark.com/").to_return(http_fixture('root_list'))
@@ -22,7 +22,7 @@ end
 describe "fetching a list of bills with more than one page" do
   let(:app_id) { "my-app-id" }
   let(:app_secret) { "my-app-secret" }
-  let(:client) { Zipmark::Client.new(app_id, app_secret) }
+  let(:client) { Zipmark::Client.new(:application_id => app_id, :application_secret => app_secret) }
 
   before do
     stub_request(:get, "https://sandbox.zipmark.com/").to_return(http_fixture('root_list'))

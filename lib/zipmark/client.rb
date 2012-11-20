@@ -12,19 +12,23 @@ module Zipmark
 
     # Public: Initialize a Zipmark Client
     #
+    # options - Hash options used to configure the Client (default: {})
     # application_id - The Identifier for your application
     # application_secret - The Secret for your Application
-    # options - Hash options used to configure the Client (default: {})
     #      :adapter - The Instance of an Adapter that wraps your preferred HTTP Client
     #      :production - The Boolean determining if Production Mode is enabled
-    def initialize(application_id, application_secret, options = {})
+    def initialize(options = {})
       @adapter = options[:adapter] || Zipmark::Adapters::HTTPClientAdapter.new
       adapter.production = options[:production]
-      adapter.username = application_id
-      adapter.password = application_secret
+      adapter.username = options[:application_id]
+      adapter.password = options[:application_secret]
+      @identifier = options[:vendor_identifier]
       @resources = load_resources
     end
 
+    def identifier
+      @identifier
+    end
 
     # Public: Send a GET Request to the given API Path
     #
@@ -54,6 +58,10 @@ module Zipmark
     # path - A String which can be a relative path to the API root, or a full URL
     def delete(path)
       adapter.delete(path)
+    end
+
+    def build_callback(request)
+      Zipmark::Callback.new(request, :client => self)
     end
 
     def method_missing(meth, *args, &block)

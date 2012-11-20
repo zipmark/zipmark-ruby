@@ -4,7 +4,7 @@ module Zipmark
       begin
         require 'httpclient'
       rescue LoadError
-        puts 'You must install httpclient to use Zipmark::Adapters::HTTClientAdapter '
+        puts 'You must install httpclient to use Zipmark::Adapters::HTTPClientAdapter '
       end
 
       attr_accessor :username, :password, :production

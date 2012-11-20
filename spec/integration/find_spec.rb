@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "fetching an individual bill" do
   let(:app_id) { "my-app-id" }
   let(:app_secret) { "my-app-secret" }
-  let(:client) { Zipmark::Client.new(app_id, app_secret) }
+  let(:client) { Zipmark::Client.new(:application_id => app_id, :application_secret => app_secret) }
   let(:bill_id) { "testbillid" }
 
   before do

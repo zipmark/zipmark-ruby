@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "creating a new bill with #create" do
   let(:app_id) { "my-app-id" }
   let(:app_secret) { "my-app-secret" }
-  let(:client) { Zipmark::Client.new(app_id, app_secret) }
+  let(:client) { Zipmark::Client.new(:application_id => app_id, :application_secret => app_secret) }
   let(:options) {
     {
       :identifier       => 'testbill8',
@@ -42,7 +42,7 @@ end
 describe "creating a new bill with #create and getting validation errors" do
   let(:app_id) { "my-app-id" }
   let(:app_secret) { "my-app-secret" }
-  let(:client) { Zipmark::Client.new(app_id, app_secret) }
+  let(:client) { Zipmark::Client.new(:application_id => app_id, :application_secret => app_secret) }
 
   let(:bill) { client.bills.create({}) }
 

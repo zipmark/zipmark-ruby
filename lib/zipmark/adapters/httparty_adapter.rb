@@ -1,5 +1,8 @@
 module Zipmark
   module Adapters
+    # Public: The HTTParty Adapter.
+    #
+    # Important Note: PUT is broken in HTTParty when using Digest Auth
     class HTTPartyAdapter
       begin
         require 'httparty'
