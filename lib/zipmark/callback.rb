@@ -72,7 +72,7 @@ module Zipmark
       if authorization_header == valid_authorization
         return true
       else
-        @errors[:authorization] = "Signature does not match."
+        errors[:authorization] = "Signature does not match."
         return false
       end
     end
@@ -81,7 +81,7 @@ module Zipmark
       if date_within_range?
         return true
       else
-        @errors[:date] = "Date is not within bounds."
+        errors[:date] = "Date is not within bounds."
         return false
       end
     end
