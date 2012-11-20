@@ -4,15 +4,31 @@ The Zipmark Ruby Client library is used to interact with Zipmark's [API](https:/
 
 ## Installation
 
+```sh
+gem install zipmark
+```
+or in your Gemfile
+
+```ruby
+gem "zipmark"
+```
+
 ### Requirements
 
 ## Initialization
+
+require 'zipmark'
 
 ## Usage Examples
 
 ### Instantiating a client
 
-Application Identifier and Application Secret should be replaced with the vendor application identifier and secret provided by Zipmark.
+```ruby
+client = Zipmark::Client.new(:application_id => "app-id", :application_secret => "my-secret", :vendor_identifier => "vendor-ident")
+```
+
+Vendor Identifier, Application Identifier, Application Secret should be replaced with the vendor application identifier and secret provided by Zipmark.
+
 
 ### Production Mode
 
