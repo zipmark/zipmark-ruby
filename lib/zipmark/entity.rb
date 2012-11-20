@@ -10,6 +10,10 @@ module Zipmark
       @resource_type = @attributes.delete("resource_type")
     end
 
+    def inspect
+      "<Entity:#{object_id} #{attributes.inspect}>"
+    end
+
     def method_missing(meth, *args, &block)
       if meth =~ /=$/
         dirty_attributes[meth.to_s.sub(/=$/, '')] = args.first
