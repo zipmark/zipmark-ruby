@@ -13,19 +13,11 @@ or in your Gemfile
 gem "zipmark"
 ```
 
-### Requirements
-
-## Initialization
-
-```ruby
-require 'zipmark'
-```
-
-## Usage Examples
-
 ### Instantiating a client
 
 ```ruby
+require 'zipmark'
+
 client = Zipmark::Client.new(
   :application_id => "app-id",
   :application_secret => "my-secret",
@@ -38,8 +30,20 @@ Vendor Identifier, Application Identifier, Application Secret should be replaced
 
 ### Production Mode
 
+By default, Zipmark::Client sends all requests to our sandbox environment.  This environment is identical to production except money never actually is moved.  When you are putting your application into production and want people to actually be able to pay, you need to turn production mode on.
+
+```ruby
+client = Zipmark::Client.new(
+  :application_id => "app-id",
+  :application_secret => "my-secret",
+  :vendor_identifier => "vendor-ident",
+  :production => true
+)
+```
+
 ### Loading a Bill from a known Bill ID
 
+client.bills.find("bill-id")
 
 ### Discovering available resources
 
