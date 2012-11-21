@@ -17,14 +17,20 @@ gem "zipmark"
 
 ## Initialization
 
+```ruby
 require 'zipmark'
+```
 
 ## Usage Examples
 
 ### Instantiating a client
 
 ```ruby
-client = Zipmark::Client.new(:application_id => "app-id", :application_secret => "my-secret", :vendor_identifier => "vendor-ident")
+client = Zipmark::Client.new(
+  :application_id => "app-id",
+  :application_secret => "my-secret",
+  :vendor_identifier => "vendor-ident"
+)
 ```
 
 Vendor Identifier, Application Identifier, Application Secret should be replaced with the vendor application identifier and secret provided by Zipmark.
