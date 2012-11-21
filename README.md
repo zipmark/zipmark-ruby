@@ -43,7 +43,9 @@ client = Zipmark::Client.new(
 
 ### Loading a Bill from a known Bill ID
 
+```ruby
 client.bills.find("bill-id")
+```
 
 ### Discovering available resources
 
