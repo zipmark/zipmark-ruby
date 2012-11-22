@@ -60,6 +60,20 @@ module Zipmark
       adapter.delete(path)
     end
 
+    # Public: Check for an ok response code (200-299)
+    #
+    # response - A response object specific to the adapter
+    def successful?(response)
+      adapter.successful?(response)
+    end
+
+    # Public: Check for a validation error response (422)
+    #
+    # response - A response object specific to the adapter
+    def validation_error?(response)
+      adapter.validation_error?(response)
+    end
+
     def build_callback(request)
       Zipmark::Callback.new(request, :client => self)
     end

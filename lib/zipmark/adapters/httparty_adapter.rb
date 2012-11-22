@@ -37,6 +37,14 @@ module Zipmark
         self.class.delete(path, adapter_options)
       end
 
+      def successful?(response)
+        response.code >= 200 && response.code < 300
+      end
+
+      def validation_error?(response)
+        response.code == 422
+      end
+
       private
       def adapter_options
         {

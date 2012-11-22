@@ -34,9 +34,9 @@ module Zipmark
 
     def apply_response(response)
       object = JSON.parse(response.body)
-      if response.ok?
+      if client.successful?(response)
         @attributes = object[resource_type]
-      elsif response.code == 422
+      elsif client.validation_error?(response)
         @errors = object
       else
         raise Zipmark::Error.new(object)
