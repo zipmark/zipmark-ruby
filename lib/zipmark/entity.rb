@@ -37,7 +37,7 @@ module Zipmark
       if client.successful?(response)
         @attributes = object[resource_type]
       elsif client.validation_error?(response)
-        @errors = object
+        @errors = object["errors"]
       else
         raise Zipmark::Error.new(object)
       end
