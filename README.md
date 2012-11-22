@@ -25,7 +25,8 @@ client = Zipmark::Client.new(
 )
 ```
 
-Vendor Identifier, Application Identifier, Application Secret should be replaced with the vendor application identifier and secret provided by Zipmark.
+Vendor Identifier, Application Identifier, Application Secret should be replaced with the 
+values provided by Zipmark.
 
 
 ### Production Mode
