@@ -44,3 +44,16 @@ describe "fetching a list of bills with more than one page" do
     bill_amounts.length.should be(8)
   end
 end
+
+describe "invalid credentials" do
+  let(:app_id) { "bad_id" }
+  let(:app_secret) { "bad_secret" }
+
+  before do
+    stub_request(:get, "https://sandbox.zipmark.com/").to_return(http_fixture('root_list_error'))
+  end
+
+  it "should raise an error" do
+    expect { Zipmark::Client.new(:application_id => app_id, :application_secret => app_secret) }.to raise_error(Zipmark::Error)
+  end
+end

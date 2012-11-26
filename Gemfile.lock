@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    zipmark (0.0.1.beta.1)
+    zipmark (0.0.1.beta.4)
 
 GEM
   remote: http://rubygems.org/

@@ -85,8 +85,13 @@ module Zipmark
     private
     def load_resources
       hash = {}
-      response = JSON.parse(get("/").body)
-      response["vendor_root"]["links"].each {|link| hash[link["rel"]] = Resource.new({ :client => self }.merge(link)) }
+      response = get("/")
+      object = JSON.parse(response.body)
+      if successful?(response)
+        object["vendor_root"]["links"].each {|link| hash[link["rel"]] = Resource.new({ :client => self }.merge(link)) }
+      else
+        raise Zipmark::Error.new(object)
+      end
       hash
     end
   end
