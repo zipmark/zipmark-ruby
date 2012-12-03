@@ -67,8 +67,8 @@ module Zipmark
 
     def validate_authorization
       string_to_sign = ["POST",hashed_content,'application/json',date.rfc2822,uri,application_identifier].join("\n")
-      signed_string = Base64.strict_encode64(OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new('sha1'), secret, string_to_sign))
-      valid_authorization = "ZM #{Base64.strict_encode64(identifier)}:#{signed_string}"
+      signed_string = [OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new('sha1'), secret, string_to_sign)].pack("m0").chomp
+      valid_authorization = "ZM #{[identifier].pack("m0").chomp}:#{signed_string}"
       if authorization_header == valid_authorization
         return true
       else
