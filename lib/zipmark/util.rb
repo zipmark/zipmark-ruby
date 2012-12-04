@@ -14,3 +14,11 @@ module Zipmark
     end
   end
 end
+
+unless Base64.respond_to?(:strict_encode64)
+  module Base64
+    def strict_encode64(bin)
+      [bin].pack("m0")
+    end
+  end
+end

@@ -1,5 +1,3 @@
-require 'json'
-
 module Zipmark
   class Iterator
     attr_accessor :current_item, :json, :options

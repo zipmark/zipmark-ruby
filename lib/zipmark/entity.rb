@@ -14,6 +14,10 @@ module Zipmark
       "<Entity:#{object_id} #{attributes.inspect}>"
     end
 
+    def id
+      attributes["id"]
+    end
+
     def method_missing(meth, *args, &block)
       if meth =~ /=$/
         dirty_attributes[meth.to_s.sub(/=$/, '')] = args.first
