@@ -1,3 +1,7 @@
+[![Build Status](https://secure.travis-ci.org/zipmark/zipmark-ruby.png?branch=master)](https://travis-ci.org/zipmark/zipmark-ruby)
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/zipmark/zipmark-ruby)
+
+
 # Zipmark Ruby Client
 
 The Zipmark Ruby Client library is used to interact with Zipmark's [API](https://dev.zipmark.com).
@@ -25,7 +29,7 @@ client = Zipmark::Client.new(
 )
 ```
 
-Vendor Identifier, Application Identifier, Application Secret should be replaced with the 
+Vendor Identifier, Application Identifier, Application Secret should be replaced with the
 values provided by Zipmark.
 
 
