@@ -10,6 +10,12 @@ module Zipmark
     # Public: Gets the Adapter.
     attr_reader :adapter
 
+    begin
+      require 'json'
+    rescue LoadError => e
+      puts 'You must have a json library installed to use Zipmark'
+    end
+
     # Public: Initialize a Zipmark Client
     #
     # options - Hash options used to configure the Client (default: {})
