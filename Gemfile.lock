@@ -17,6 +17,7 @@ GEM
     json (1.7.5)
     multi_json (1.3.7)
     multi_xml (0.5.1)
+    rake (10.0.2)
     rspec (2.11.0)
       rspec-core (~> 2.11.0)
       rspec-expectations (~> 2.11.0)
@@ -47,6 +48,7 @@ DEPENDENCIES
   httparty (= 0.9.0)
   httpclient
   json
+  rake
   rspec
   simplecov
   timecop

@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gemspec
 
+gem 'rake'
 gem "json"
 gem "rspec"
 gem "simplecov", :require => false
