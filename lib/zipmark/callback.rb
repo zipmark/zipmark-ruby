@@ -3,10 +3,8 @@ require 'openssl'
 
 # Ruby 1.8 compatibility
 unless Base64.respond_to?(:strict_encode64)
-  module Base64
-    def strict_encode64(bin)
-      [bin].pack("m0")
-    end
+  def Base64.strict_encode64(bin)
+    [bin].pack("m0")
   end
 end
 
