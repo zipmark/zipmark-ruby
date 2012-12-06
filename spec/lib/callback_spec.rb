@@ -36,6 +36,20 @@ describe Zipmark::Callback do
   it "should validate callback" do
     callback.should be_valid
   end
+
+  it "should provide the callback event" do
+    callback.event.should == "bill.create"
+  end
+
+  it "should provide the object type" do
+    callback.object_type.should == "Bill"
+  end
+
+  it "should provide the object" do
+    object = callback.object
+    object.should be_kind_of(Zipmark::Entity)
+    object.resource_type.should == "bill"
+  end
 end
 
 describe Zipmark::Callback, "bad credentials" do
