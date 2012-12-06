@@ -23,6 +23,10 @@ module Zipmark
       @request.raw_post
     end
 
+    def parsed_body
+      @parsed_body ||= JSON.parse(body)
+    end
+
     def identifier
       client.identifier if client
     end
@@ -36,15 +40,15 @@ module Zipmark
     end
 
     def event
-      raise "unimplemented"
+      parsed_body["callback"]["event"]
     end
 
     def object
-      raise "unimplemented"
+      Zipmark::Entity.new(parsed_body["callback"]["object"].merge(:client => @client, :resource_type => object_type.downcase))
     end
 
     def object_type
-      raise "unimplemented"
+      parsed_body["callback"]["object_type"]
     end
 
     def hashed_content
