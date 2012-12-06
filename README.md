@@ -1,4 +1,5 @@
 [![Build Status](https://secure.travis-ci.org/zipmark/zipmark-ruby.png?branch=master)](https://travis-ci.org/zipmark/zipmark-ruby)
+[![Dependency Status](https://gemnasium.com/zipmark/zipmark-ruby.png)](https://gemnasium.com/zipmark/zipmark-ruby)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/zipmark/zipmark-ruby)
 
 

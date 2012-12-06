@@ -58,7 +58,7 @@ module Zipmark
     end
 
     def uri
-      @request.fullpath
+      @request.path
     end
 
     def date_within_range?
