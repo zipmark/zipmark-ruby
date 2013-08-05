@@ -27,4 +27,7 @@ module Zipmark
 
   # Public: Error that is raised when a Resource is malformed or invalid
   class ResourceError < StandardError; end
+
+  # Public: Error that is raised when a Resource cannot be found
+  class NotFoundError < StandardError; end
 end

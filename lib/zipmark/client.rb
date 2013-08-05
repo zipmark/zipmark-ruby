@@ -36,6 +36,10 @@ module Zipmark
       @identifier
     end
 
+    def resources
+      @resources
+    end
+
     # Public: Send a GET Request to the given API Path
     #
     # path - A String which can be a relative path to the API root, or a full URL

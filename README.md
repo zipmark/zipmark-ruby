@@ -33,7 +33,6 @@ client = Zipmark::Client.new(
 Vendor Identifier, Application Identifier, Application Secret should be replaced with the
 values provided by Zipmark.
 
-
 ### Production Mode
 
 By default, Zipmark::Client sends all requests to our sandbox environment.  This environment is identical to production except money never actually is moved.  When you are putting your application into production and want people to actually be able to pay, you need to turn production mode on.
@@ -53,16 +52,50 @@ client = Zipmark::Client.new(
 client.bills.find("bill-id")
 ```
 
+Attempting to find a bill that doesn't exist will raise a Zipmark::NotFound error.
+
 ### Discovering available resources
 
 Resources will contain an array of all available resources.
+
+```ruby
+client.resources.keys
+```
 
 ### Creating a new Bill
 
 Create a bill object, set required attributes, send it to Zipmark
 
+```ruby
+bill = client.bills.create(
+  :identifier => "1234",
+  :amount_cents => 100,
+  :bill_template_id => bill_template_id,
+  :memo => "My memo",
+  :content => '{"memo":"My Memo"}',
+  :customer_id => "Customer 1",
+  :date => "20130805")
+```
+
 As an alternative, it is possible to build an object first and then save it afterwards
 
+```ruby
+bill = client.bills.build(
+  :identifier => "1234",
+  :amount_cents => 100,
+  :bill_template_id => bill_template_id,
+  :memo => "My memo",
+  :content => '{"memo":"My Memo"}',
+  :customer_id => "Customer 1",
+  :date => "20130805")
+bill.save
+```
+
+Regardless of which method is used, if a bill is valid, it was successfully saved to Zipmark:
+
+```ruby
+puts bill.errors unless bill.valid?
+```
 
 ### Updating an existing Bill
 
@@ -103,3 +136,11 @@ Valid callbacks contain events, object types and objects.  The below functions w
 Please see the [Zipmark API](https://dev.zipmark.com) or contact Zipmark Support via [email](mailto:developers@zipmark.com) or [chat](http://bit.ly/zipmarkAPIchat) for more information.
 
 ## Unit/Acceptance Tests
+
+Tests are written in rspec.  To run the full test suite, execute the following:
+
+```
+bundle install
+
+bundle exec rake spec
+```
