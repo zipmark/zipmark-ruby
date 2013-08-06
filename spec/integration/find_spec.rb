@@ -22,6 +22,6 @@ describe "fetching an individual bill" do
   end
 
   it "should raise an error when the bill can't be found" do
-    expect { client.bills.find(invalid_bill_id) }.to raise_error(Zipmark::NotFoundError)
+    expect { client.bills.find(invalid_bill_id) }.to raise_error(Zipmark::Error)
   end
 end

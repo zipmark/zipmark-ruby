@@ -12,12 +12,11 @@ module Zipmark
 
     def find(id)
       response = client.get("/" + rel + "/" + id)
+      object = JSON.parse(response.body)
       if client.successful?(response)
-        json = response.body
-        object = JSON.parse(json)
         Zipmark::Entity.new(object[resource_name].merge(:client => client, :resource_type => resource_name))
       else
-        raise(Zipmark::NotFoundError, "#{resource_name} #{id} not found")
+        raise Zipmark::Error.new(!!object ? object.merge(:status => response.status) : response)
       end
     end
 
