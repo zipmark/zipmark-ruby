@@ -37,7 +37,7 @@ module Zipmark
     end
 
     def next_item
-      item =  @items.fetch(@items.index(current_item) + 1) rescue nil
+      item = @items.fetch(@items.index(current_item) + 1) rescue nil
       if item
         @current_item = item
       else

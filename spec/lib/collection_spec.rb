@@ -8,7 +8,7 @@ describe Zipmark::Collection do
   let(:mock_iterator_instance) { mock('iterator instance') }
   let(:collection) { Zipmark::Collection.new(mock_resource, mock_iterator) }
 
-  subject { collection}
+  subject { collection }
 
   before do
     mock_resource.should_receive(:rel).and_return("bills")
@@ -20,7 +20,7 @@ describe Zipmark::Collection do
   end
 
   it "should have three items" do
-    mock_iterator_instance.should_receive(:current_items).and_return([1,2,3])
+    mock_iterator_instance.should_receive(:items).and_return([1,2,3])
     collection.items.length.should == 3
   end
 

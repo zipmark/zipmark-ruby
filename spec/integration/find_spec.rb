@@ -6,11 +6,13 @@ describe "fetching an individual bill" do
   let(:client) { Zipmark::Client.new(:application_id => app_id, :application_secret => app_secret) }
   let(:bill_id) { "testbillid" }
   let(:invalid_bill_id) { "invalidbillid" }
+  let(:callback_id) { "testcallbackid" }
 
   before do
     stub_request(:get, "https://sandbox.zipmark.com/").to_return(http_fixture('root_list'))
     stub_request(:get, "https://sandbox.zipmark.com/bills/testbillid").to_return(http_fixture('bills/get'))
     stub_request(:get, "https://sandbox.zipmark.com/bills/invalidbillid").to_return(http_fixture('bills/get_fail'))
+    stub_request(:get, "https://sandbox.zipmark.com/callbacks/testcallbackid").to_return(http_fixture('callbacks/get'))
   end
 
   it "should return an individual bill" do
@@ -23,5 +25,9 @@ describe "fetching an individual bill" do
 
   it "should raise an error when the bill can't be found" do
     expect { client.bills.find(invalid_bill_id) }.to raise_error(Zipmark::Error)
+  end
+
+  it "should return the callback's url attribute, not the url of the object" do
+    client.callbacks.find(callback_id).url.should eq("https://example.com/callbacks")
   end
 end

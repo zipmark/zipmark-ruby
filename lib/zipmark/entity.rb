@@ -1,6 +1,6 @@
 module Zipmark
   class Entity
-    attr_accessor :attributes, :client, :resource_type, :errors, :dirty_attributes
+    attr_accessor :attributes, :client, :resource_type, :errors, :dirty_attributes, :links
 
     def initialize(options={})
       @errors = {}
@@ -8,6 +8,17 @@ module Zipmark
       @dirty_attributes = {}
       @client = @attributes.delete("client")
       @resource_type = @attributes.delete("resource_type")
+      set_links
+    end
+
+    def set_links
+      @links = {}
+      object_links = @attributes.delete("links")
+      if object_links.kind_of?(Array)
+        object_links.each do |link|
+          @links[link["rel"]] = Link.new(link)
+        end
+      end
     end
 
     def inspect
@@ -27,8 +38,8 @@ module Zipmark
     end
 
     def save
-      if url
-        response = client.put(url, resource_type => dirty_attributes)
+      if links["self"]
+        response = client.put(links["self"].href, resource_type => dirty_attributes)
       else
         response = client.post("/#{resource_type}s", resource_type => attributes)
       end
@@ -40,6 +51,7 @@ module Zipmark
       object = JSON.parse(response.body)
       if client.successful?(response)
         @attributes = object[resource_type]
+        set_links
       elsif client.validation_error?(response)
         @errors = object["errors"]
       else
@@ -49,11 +61,6 @@ module Zipmark
 
     def valid?
       !!(id && errors.empty?)
-    end
-
-    def url
-      link = links.detect {|link| link["rel"] == "self" } if links && !links.empty?
-      link["href"] if link
     end
 
     def updated_at
