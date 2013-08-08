@@ -31,7 +31,9 @@ describe "creating a new bill with #create" do
   end
 
   it "should now have a url" do
-    bill.url.should eq("http://example.org/bills/3ce95db62b1069e59e122c515eb191c70987")
+    bill.links.length.should eq(2)
+    bill.links["self"].href.should eq("http://example.org/bills/3ce95db62b1069e59e122c515eb191c70987")
+    bill.links["web"].href.should eq("http://example.com/bills/3ce95db62b1069e59e122c515eb191c70987")
   end
 
   it "should have an id"  do

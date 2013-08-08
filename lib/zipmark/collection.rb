@@ -10,7 +10,7 @@ module Zipmark
     end
 
     def items
-      iterator.current_items
+      iterator.items
     end
 
     def length
