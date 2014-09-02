@@ -127,6 +127,15 @@ The client is able to process, verify and extract data from callbacks received f
 
 #### Verifying a callback
 
+To verify a callback, you need the entire request (headers, request body, etc.) so it has to be done from the context of the controller layer (or a model that is passed the entire request).
+
+```ruby
+# In a controller:
+client.build_callback(request).valid?
+```
+
+Will return true or false, based on a signed header from Zipmark.
+
 #### Retrieving the callback data
 
 Valid callbacks contain events, object types and objects.  The below functions will return their respective values/objects, or null if the callback is invalid.
