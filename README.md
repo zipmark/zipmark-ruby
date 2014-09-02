@@ -123,6 +123,23 @@ The Zipmark_Iterator can be used to iterate through all objects of a given resou
 
 The client is able to process, verify and extract data from callbacks received from the Zipmark service.
 
+#### Setting up a Callback
+
+Callbacks have to be enabled by creating a callback with an event type and the callback URL. To enable Zipmark to send a callback:
+
+```ruby
+callback = client.callbacks.create(
+  :url => 'https://example.com/callback',
+  :event => 'name_of_event')
+```
+
+The possible event names include:
+
+ * bill.create
+ * bill.update
+ * bill_payment.create
+ * bill_payment.update
+
 #### Loading a callback response
 
 #### Verifying a callback
