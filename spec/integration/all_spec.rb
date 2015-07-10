@@ -1,47 +1,47 @@
 require 'spec_helper'
 
-describe "fetching a list of bills" do
+describe "fetching a list of deposits" do
   let(:app_id) { "my-app-id" }
   let(:app_secret) { "my-app-secret" }
   let(:client) { Zipmark::Client.new(:application_id => app_id, :application_secret => app_secret) }
 
   before do
-    stub_request(:get, "https://sandbox.zipmark.com/").to_return(http_fixture('root_list'))
-    stub_request(:get, "http://example.org/bills").to_return(http_fixture("bills/list"))
+    stub_request(:get, "https://sandbox.zipmark.com/").
+      with(:headers => {'Accept'=>'application/vnd.com.zipmark.v3+json', 'Content-Type'=>'application/json'}).
+      to_return(http_fixture('root/get'))
+    stub_request(:get, "http://example.org/deposits").to_return(http_fixture("deposits/list"))
   end
 
-  it "should produce a collection of bills" do
-    client.bills.all.should be_a(Zipmark::Collection)
+  it "should produce a collection of deposits" do
+    client.deposits.all.should be_a(Zipmark::Collection)
   end
 
-  it "should have 22 bills in it" do
-    client.bills.all.length.should be(22)
+  it "should have 16 deposits in it" do
+    client.deposits.all.length.should be(16)
   end
 end
 
-describe "fetching a list of bills with more than one page" do
+describe "fetching a list of deposits with more than one page" do
   let(:app_id) { "my-app-id" }
   let(:app_secret) { "my-app-secret" }
   let(:client) { Zipmark::Client.new(:application_id => app_id, :application_secret => app_secret) }
 
   before do
-    stub_request(:get, "https://sandbox.zipmark.com/").to_return(http_fixture('root_list'))
-    stub_request(:get, "http://example.org/bills").to_return(http_fixture("bills/list_p1_of_3"))
-    stub_request(:get, "http://example.org/bills?page=2").to_return(http_fixture("bills/list_p2_of_3"))
-    stub_request(:get, "http://example.org/bills?page=3").to_return(http_fixture("bills/list_p3_of_3"))
+    stub_request(:get, "https://sandbox.zipmark.com/").to_return(http_fixture('root/get'))
+    stub_request(:get, "http://example.org/deposits").to_return(http_fixture("deposits/list"))
   end
 
-  it "should produce a collection of bills" do
-    client.bills.all.should be_a(Zipmark::Collection)
+  it "should produce a collection of deposits" do
+    client.deposits.all.should be_a(Zipmark::Collection)
   end
 
-  it "should have 8 bills in it" do
-    client.bills.all.length.should be(8)
+  it "should have 16 deposits in it" do
+    client.deposits.all.length.should be(16)
   end
 
-  it "should be able to iterate over all 8 bills and get an attirbute" do
-    bill_amounts = client.bills.all.map(&:amount_cents)
-    bill_amounts.length.should be(8)
+  it "should be able to iterate over all 16 deposits and get an attribute" do
+    deposit_amounts = client.deposits.all.map(&:amount_cents)
+    deposit_amounts.length.should be(16)
   end
 end
 

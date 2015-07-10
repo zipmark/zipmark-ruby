@@ -32,6 +32,6 @@ describe Zipmark::Adapters::HTTPartyAdapter do
   end
 
   it "should have accept mime type set" do
-    adapter.api_accept_mime.should == "application/vnd.com.zipmark.v2+json"
+    adapter.api_accept_mime.should == "application/vnd.com.zipmark.v3+json"
   end
 end

@@ -1,63 +1,60 @@
 require 'spec_helper'
 
-describe "creating a new bill with #create" do
+describe "creating a new deposit with #create" do
   let(:app_id) { "my-app-id" }
   let(:app_secret) { "my-app-secret" }
   let(:client) { Zipmark::Client.new(:application_id => app_id, :application_secret => app_secret) }
-  let(:options) {
-    {
-      :identifier       => 'testbill8',
-      :amount_cents     => 12345,
-      :bill_template_id => '7eadd7be-60eb-4054-a172-107d394585e2',
-      :memo             => 'Test Bill #8',
-      :date             => '2012-09-10',
-      :content          => '{"content":"foo"}'
-    }
-  }
 
-  let(:bill) { client.bills.create(options) }
+  let(:body)    { { :customer_identifier => 'c93e6eb9-222d-4d9b-8233-8bed2092abc9', :amount_cents => 5000, :memo => 'For blogging excellently' } }
+  let(:deposit) { client.deposits.create(body) }
 
   before do
-    stub_request(:get, "https://sandbox.zipmark.com/").to_return(http_fixture('root_list'))
-    stub_request(:post, "https://sandbox.zipmark.com/bills").to_return(http_fixture("bills/create"))
+    # stub_request(:get, "https://sandbox.zipmark.com").to_return('')
+    stub_request(:get, "https://sandbox.zipmark.com/").
+      with(:headers => {'Accept'=>'application/vnd.com.zipmark.v3+json', 'Content-Type'=>'application/json'}).
+      to_return(http_fixture('root/get'))
+
+    stub_request(:post, "https://sandbox.zipmark.com/deposits").
+      to_return(http_fixture('deposits/create'))
   end
 
   it "should create a new entity" do
-    bill.should be_kind_of(Zipmark::Entity)
+    deposit.should be_kind_of(Zipmark::Entity)
   end
 
   it "should be valid" do
-    bill.should be_valid
+    deposit.should be_valid
   end
 
   it "should now have a url" do
-    bill.links.length.should eq(2)
-    bill.links["self"].href.should eq("http://example.org/bills/3ce95db62b1069e59e122c515eb191c70987")
-    bill.links["web"].href.should eq("http://example.com/bills/3ce95db62b1069e59e122c515eb191c70987")
+    deposit.links.length.should eq(1)
+    deposit.links["self"].href.should eq("http://example.org/deposits/fbb2e07a-2f21-48a0-81fe-2f6c4b75e5f1")
   end
 
   it "should have an id"  do
-    bill.id.should eq("3ce95db62b1069e59e122c515eb191c70987")
+    deposit.id.should eq("fbb2e07a-2f21-48a0-81fe-2f6c4b75e5f1")
   end
 end
 
-describe "creating a new bill with #create and getting validation errors" do
+describe "creating a new deposit with #create and getting validation errors" do
   let(:app_id) { "my-app-id" }
   let(:app_secret) { "my-app-secret" }
   let(:client) { Zipmark::Client.new(:application_id => app_id, :application_secret => app_secret) }
 
-  let(:bill) { client.bills.create({}) }
+  let(:deposit) { client.deposits.create({}) }
 
   before do
-    stub_request(:get, "https://sandbox.zipmark.com/").to_return(http_fixture('root_list'))
-    stub_request(:post, "https://sandbox.zipmark.com/bills").to_return(http_fixture("bills/create_fail"))
+    stub_request(:get, "https://sandbox.zipmark.com/").
+             with(:headers => {'Accept'=>'application/vnd.com.zipmark.v3+json', 'Content-Type'=>'application/json'}).
+             to_return(http_fixture('root/get'))
+    stub_request(:post, "https://sandbox.zipmark.com/deposits").to_return(http_fixture("deposits/create_fail"))
   end
 
   it "should not be valid" do
-    bill.should_not be_valid
+    deposit.should_not be_valid
   end
 
   it "should have an array of errors" do
-    bill.errors.should_not be_empty
+    deposit.errors.should_not be_empty
   end
 end

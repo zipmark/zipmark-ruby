@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Date: Fri, 10 Jul 2015 18:53:39 GMT
+Content-Type: application/json; charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+Content-Length: 499
+X-UA-Compatible: IE=Edge,chrome=1
+ETag: "96727c8676ed432d45e87dae794417a3"
+Cache-Control: must-revalidate, private, max-age=0
+X-Request-Id: d71f861935c938dbbd0b28087fb26a36
+X-Rack-Cache: miss
+
+{"deposit":{"links":[{"rel":"self","href":"https://sandbox.zipmark.com/deposits/d7e6ef68-3971-4e28-96f3-6e8224039794"}],"amount_cents":1000,"status":"pending","memo":"for doing amazing things","metadata":{},"created_at":"2015-06-12T18:06:48Z","bank_account":{"links":[{"rel":"self","href":"https://sandbox.zipmark.com/accounts/0d5988f6-21b5-46cb-af10-6997c75198ce"}],"id":"0d5988f6-21b5-46cb-af10-6997c75198ce","name":"JPMORGAN CHASE BANK Personal Checking Account (*******002)","status":"active"}}}

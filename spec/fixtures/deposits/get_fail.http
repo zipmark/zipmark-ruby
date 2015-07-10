@@ -1,0 +1,12 @@
+HTTP/1.1 404 Not Found
+Date: Fri, 10 Jul 2015 19:33:08 GMT
+Content-Type: application/json; charset=utf-8
+Connection: keep-alive
+Status: 404 Not Found
+Content-Length: 84
+X-UA-Compatible: IE=Edge,chrome=1
+Cache-Control: no-cache, private
+X-Request-Id: fbd68aa37939d7036b7901d32b0a6bbf
+X-Rack-Cache: miss
+
+{"errors":{"type":"Zipmark::NotFoundError","message":"Not found - /deposit/dafddf"}}

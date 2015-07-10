@@ -9,6 +9,11 @@ require 'zipmark/pagination'
 require 'zipmark/resource'
 require 'zipmark/util'
 require 'zipmark/version'
+require 'zipmark/token'
+require 'zipmark/display'
+require 'zipmark/display_proxy'
+require 'zipmark/workflow'
+require 'zipmark/workflow_proxy'
 
 require 'zipmark/adapters/httpclient_adapter'
 
@@ -21,7 +26,7 @@ module Zipmark
   SANDBOX_API_ENDPOINT = 'https://sandbox.zipmark.com'
 
   # Public: String Representing the Current Zipmark API Version
-  API_VERSION = 'v2'
+  API_VERSION = 'v3'
 
   # Public: Error that is raised when a client is expected but not found
   class ClientError < StandardError; end

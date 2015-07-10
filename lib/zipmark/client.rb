@@ -92,13 +92,21 @@ module Zipmark
       @resources[meth.to_s] || raise(NoMethodError, "No resource or method: '#{meth}'")
     end
 
+    def display
+      DisplayProxy.new(self)
+    end
+
+    def workflow
+      WorkflowProxy.new(self)
+    end
+
     private
     def load_resources
       hash = {}
       response = get("/")
       object = JSON.parse(response.body)
       if successful?(response)
-        object["vendor_root"]["links"].each {|link| hash[link["rel"]] = Resource.new({ :client => self }.merge(link)) }
+        object["root"]["links"].each {|link| hash[link["rel"]] = Resource.new({ :client => self }.merge(link)) }
       else
         raise Zipmark::Error.new(object)
       end

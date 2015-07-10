@@ -14,7 +14,11 @@ module Zipmark
       end
 
       def initialize_client
-        client = HTTPClient.new
+        client = HTTPClient.new(
+          default_header: { 'Content-Type' => 'application/json', 'Accept' => api_accept_mime },
+          force_basic_auth: true
+        )
+        client.ssl_config.ssl_version = :TLSv1
         client.set_auth(api_endpoint, username, password)
         return client
       end
@@ -28,19 +32,19 @@ module Zipmark
       end
 
       def get(path)
-        httpclient.get(url_for(path), adapter_options)
+        httpclient.get(url_for(path))
       end
 
       def post(path, body)
-        httpclient.post(url_for(path), adapter_options.merge(:body => body.to_json))
+        httpclient.post(url_for(path), :body => body.to_json)
       end
 
       def put(path, body)
-        httpclient.put(url_for(path), adapter_options.merge(:body => body.to_json))
+        httpclient.put(url_for(path), :body => body.to_json)
       end
 
       def delete(path)
-        httpclient.delete(url_for(path), adapter_options)
+        httpclient.delete(url_for(path))
       end
 
       def url_for(path)
@@ -56,13 +60,6 @@ module Zipmark
 
       def validation_error?(response)
         response.code == 422
-      end
-
-      private
-      def adapter_options
-        {
-          :header => { 'Content-Type' => 'application/json', 'Accept' => api_accept_mime }
-        }
       end
     end
   end
