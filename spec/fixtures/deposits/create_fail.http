@@ -1,0 +1,12 @@
+HTTP/1.1 422 Unprocessable Entity
+Date: Fri, 10 Jul 2015 18:57:35 GMT
+Content-Type: application/json; charset=utf-8
+Connection: keep-alive
+Status: 422 Unprocessable Entity
+Content-Length: 68
+X-UA-Compatible: IE=Edge,chrome=1
+Cache-Control: no-cache
+X-Request-Id: a9ffd05d9f9fde9f70d09ac07233556b
+X-Rack-Cache: invalidate, pass
+
+{"errors":{"base":["No customer located with provided identifier"]}}

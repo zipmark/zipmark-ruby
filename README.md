@@ -170,3 +170,53 @@ bundle install
 
 bundle exec rake spec
 ```
+
+
+#### Creating a Token
+
+For a Workflow
+```
+workflow = client.workflow.create(name: 'enrollment', data: { customer_id: 'some unique permanent id' })
+workflow.token
+```
+
+For a Display
+```
+display = client.display.create(name: 'recent-transaction', data: { customer_id: 'some unique permanet id' })
+display.token
+```
+
+
+#### Deposits Resource
+
+**Get deposits**
+`client.get('deposits')`
+
+**Get a specific deposit**
+`client.get('deposits/DEPOSIT_ID')`
+
+**Cancel a deposit**
+`client.put('deposits/DEPOSIT_ID/cancel', '')`
+
+**Make a Depost**
+```ruby
+body = { :deposit => { :customer_identifier => 'their unique and permanent identifier', :amount_cents => 1000, :memo => 'an example memo' } }
+client.post('deposits', body)
+```
+
+#### Customers Resource
+
+**Get Customers**
+`client.get('customers')`
+
+**Get a specific customer**
+`client.get('customers/CUSTOMER_ID')`
+
+#### Accounts Resource
+
+**Get accounts**
+`client.get('accounts')`
+
+**Get a specific account**
+`client.get('accounts/ACCOUNT_ID')`
+

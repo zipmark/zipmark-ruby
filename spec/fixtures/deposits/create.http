@@ -1,0 +1,12 @@
+HTTP/1.1 201 Created
+Date: Fri, 10 Jul 2015 19:24:15 GMT
+Content-Type: application/json; charset=utf-8
+Connection: keep-alive
+Status: 201 Created
+X-UA-Compatible: IE=Edge,chrome=1
+ETag: "22e0b67e6305fd3e391858b039aea35c"
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: 4b613e35fa5eb907efe4f4e61d09666a
+X-Rack-Cache: invalidate, pass
+
+{"deposit":{"links":[{"rel":"self","href":"http://example.org/deposits/fbb2e07a-2f21-48a0-81fe-2f6c4b75e5f1"}],"id":"fbb2e07a-2f21-48a0-81fe-2f6c4b75e5f1","amount_cents":5000,"status":"pending","memo":"For blogging excellently","metadata":{},"created_at":"2015-07-09T22:50:29Z","bank_account":{"links":[{"rel":"self","href":"http://example.org/accounts/c1105e38-4f45-4cc8-ba72-48 3de5b000b3"}],"id":"c1105e38-4f45-4cc8-ba72-483de5b000b3","name":"Bada Bank Personal Checking Account (*******391)","status":"active"}}}

@@ -29,6 +29,10 @@ module Zipmark
       attributes["id"]
     end
 
+    def indentifier
+      attributes['identifier']
+    end
+
     def method_missing(meth, *args, &block)
       if meth =~ /=$/
         dirty_attributes[meth.to_s.sub(/=$/, '')] = args.first
@@ -60,7 +64,7 @@ module Zipmark
     end
 
     def valid?
-      !!(id && errors.empty?)
+      !!((id ||identifier) && errors.empty?)
     end
 
     def updated_at

@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Date: Fri, 10 Jul 2015 18:49:23 GMT
+Content-Type: application/json; charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+Content-Length: 347
+X-UA-Compatible: IE=Edge,chrome=1
+ETag: "9b2016be7be06efa7fe2258fee6400f8"
+Cache-Control: must-revalidate, private, max-age=0
+X-Request-Id: 1aaa633027826042608cf10f70120d32
+X-Rack-Cache: miss
+
+{"root":{"links":[{"rel":"customers","href":"http://example.org/customers"},{"rel":"accounts","href":"http://example.org/accounts"},{"rel":"deposits","href":"http://example.org/deposits"},{"rel":"payments","href":"http://example.org/payments"},{"rel":"webhooks","href":"http://example.org/webhooks"}]}}

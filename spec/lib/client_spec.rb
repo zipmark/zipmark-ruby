@@ -22,4 +22,26 @@ describe Zipmark::Client do
     client.adapter.should_receive(:get).with("/")
     client.get("/")
   end
+
+  describe "#display" do
+    it 'it returns a DisplayProxy' do
+      client.display.should be_a(DisplayProxy)
+    end
+
+    it 'sets itself to the client on the DisplayProxy' do
+      proxy = client.display
+      proxy.client.should eql(client)
+    end
+  end
+
+  describe "#workflow" do
+    it 'it returns a WorkflowProxy' do
+      client.workflow.class.should eql(WorkflowProxy)
+    end
+
+    it 'sets itself to the client on the WorkflowProxy' do
+      proxy = client.workflow
+      proxy.client.should eql(client)
+    end
+  end
 end
