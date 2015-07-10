@@ -3,10 +3,11 @@ source 'http://rubygems.org'
 gemspec
 
 gem 'rake'
-gem "json", '1.8.2'
+gem "json"
 gem "rspec"
+gem 'rspec-its'
 gem "simplecov", :require => false
-gem "httparty", '0.9.0'
+gem "httparty"
 gem 'webmock'
 gem 'httpclient'
 gem 'tomdoc'

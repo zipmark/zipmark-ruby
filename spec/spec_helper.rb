@@ -5,6 +5,7 @@ SimpleCov.start do
 end
 
 require 'rspec'
+require 'rspec/its'
 require 'zipmark'
 require 'webmock/rspec'
 require 'timecop'
